@@ -1,6 +1,7 @@
 module Main where
 
-import Bernoulli ( bernoullis )
+import Dirichlet
 
 main :: IO ()
-main = print $ last $ take 5000 bernoullis
+main = mapM_ print $ zip indexes dirichlets
+    where indexes = [0..1000]

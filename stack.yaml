@@ -39,10 +39,7 @@ packages:
 # - git: https://github.com/commercialhaskell/stack.git
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
-extra-deps:
-- visual-prof-0.5@sha256:9111e2fcf200033685dd4afae53bd0d931ee73b6eb7c23db09468f9af247d3a1,1617
-- haskell-src-exts-1.13.5@sha256:b81787ad844c8ce1fe550eb0d2f7dfb32a56f3b58163ae91c55c00cd52a76af1,5790
-- regexpr-0.5.4@sha256:a942463f1f25638c81b1c1feab5f958f6f404114113b7788f6a7db95f60e5fe2,2202
+extra-deps: []
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

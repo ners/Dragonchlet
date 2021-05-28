@@ -1,2 +1,9 @@
-.stack-work/
-*~
+*
+!*/
+.*/
+!*.hs
+!*.nix
+!*.yaml
+!.gitignore
+!LICENSE
+!README.md
