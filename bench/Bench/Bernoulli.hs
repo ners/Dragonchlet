@@ -3,6 +3,5 @@ module Bench.Bernoulli ( bernoulliBench ) where
 import Bernoulli
 import Criterion.Main
 
-takeBernoulli = last . (`take` bernoullis)
-
-bernoulliBench = bgroup "bernoulli" [ bench (show n) $ whnf takeBernoulli n | n <- [1000,1250..3000] ]
+bernoulliBench :: Benchmark
+bernoulliBench = bgroup "bernoulli" [ bench (show n) $ whnf (bernoullis !!) n | n <- [100,200..2500] ]
