@@ -12,4 +12,4 @@ taylors = gen 0 1 bernoullis
         gen :: Rational -> Rational -> [Rational] -> [Rational]
         gen n pow (b:_:bs) = let first = pow * (pow - 1) * abs b / factorial (2 * n)
                                  nexts = gen (n + 1) (pow * 2) bs
-                              in first : nexts
+                              in -first : nexts
