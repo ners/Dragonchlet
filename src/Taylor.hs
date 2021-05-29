@@ -1,15 +1,18 @@
 module Taylor ( taylors ) where
 
 import Bernoulli ( bernoullis )
+import Debug.Trace
 
 factorial :: (Eq a, Num a) => a -> a
 factorial 0 = 1
 factorial n = n * factorial (n - 1)
 
 taylors :: [Rational]
-taylors = gen 0 1 bernoullis
+taylors = drop 2 $ gen 1 bernoullis
+
+gen :: Integer -> [Rational] -> [Rational]
+gen n (b:_:bs) = 0 : -first : nexts
     where
-        gen :: Rational -> Rational -> [Rational] -> [Rational]
-        gen n pow (b:_:bs) = let first = pow * (pow - 1) * abs b / factorial (2 * n)
-                                 nexts = gen (n + 1) (pow * 2) bs
-                              in -first : nexts
+        nexts = gen (n + 2) bs
+        first | b == 0 = 0
+              | otherwise = 2^(n-1) * (2^(n-1) - 1) * abs b / fromIntegral (factorial $ n - 1)
