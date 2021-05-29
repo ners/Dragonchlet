@@ -3,12 +3,16 @@ module Dirichlet ( dirichlet, dirichlets ) where
 import Taylor
 import Divisors
 
+import Data.Tuple ( swap )
+
 dirichlet :: Int -> Rational
 dirichlet n = sum parts
     where
         divs = divisors n
-        parts = map (\(p,q) -> fromIntegral p * taylors !! (q-1)) divs
+        uniqueDivs = filter (uncurry (/=)) divs
+        part :: (Int,Int) -> Rational
+        part (p,q) = fromIntegral p * taylors !! (q - 1)
+        parts = map part $ divs ++ (swap <$> uniqueDivs)
 
-dirichlets :: [Rational]
-dirichlets = dirichlet <$> [0..]
-
+dirichlets :: [(Int, Rational)]
+dirichlets = (\n -> (n, dirichlet n)) <$> [0..]

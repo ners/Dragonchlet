@@ -3,5 +3,5 @@ module Main where
 import Dirichlet
 
 main :: IO ()
-main = mapM_ print $ zip indexes dirichlets
-    where indexes = [0..1000]
+main = do
+    mapM_ print $ take 10 dirichlets
