@@ -1,7 +1,6 @@
 module Taylor ( taylors ) where
 
 import Bernoulli ( bernoullis )
-import Debug.Trace
 
 factorial :: (Eq a, Num a) => a -> a
 factorial 0 = 1

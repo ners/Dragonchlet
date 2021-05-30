@@ -1,23 +1,16 @@
-module Dirichlet ( dirichlet, dirichlets ) where
+module Dirichlet ( dirichlets ) where
 
 import Taylor
 import Divisors
 
-import Data.Tuple ( swap )
+convolution :: Int -> Rational
+convolution n = sum parts
+    where parts = part <$> divisors n
+          part (p,q) = fromIntegral p * taylors !! (q - 1)
 
-convolution :: Int -> Int -> Rational
-convolution n k = dirichlet k * sum parts
-    where
-        divs = divisors (n-k)
-        uniqueDivs = filter (uncurry (/=)) divs
-        part :: (Int,Int) -> Rational
-        part (p,q) = fromIntegral p * taylors !! (q - 1)
-        parts = map part $ divs ++ (swap <$> uniqueDivs)
-
-dirichlet :: Int -> Rational
-dirichlet 0 = 1
-dirichlet n = sum parts / fromIntegral n
-    where parts = convolution n <$> [0..n-1]
-
-dirichlets :: [(Int, Rational)]
-dirichlets = (\n -> (n, dirichlet n)) <$> [0..]
+dirichlets :: [Rational]
+dirichlets = 1 : gen 1
+    where gen :: Int -> [Rational]
+          gen n = let convolutions = convolution <$> [n,n-1..1]
+                      parts = zipWith (*) dirichlets convolutions
+                   in sum parts / fromIntegral n : gen (n+1)
