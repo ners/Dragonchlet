@@ -36,6 +36,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - Dragonchlet
+    - gnuplot
 
 benchmarks:
   Dragonchlet-benchmarks:
